@@ -1,8 +1,8 @@
-# Sistema Financeiro Simplificado
+# Sistema Financeiro 
 
 Um sistema web elegante e completo para controle de finanças pessoais, desenvolvido em **Python + Flask** com banco de dados SQLite.
 
-## 📋 Descrição do Sistema
+## Descrição do Sistema
 
 O Sistema Financeiro Simplificado é uma aplicação que permite aos usuários gerenciar suas finanças pessoais de forma simples e eficiente. Através de uma interface intuitiva, os usuários podem:
 
@@ -12,7 +12,7 @@ O Sistema Financeiro Simplificado é uma aplicação que permite aos usuários g
 - **Filtrar e consultar** histórico de transações
 - **Rastrear ações** através de logs de auditoria
 
-## 🏗️ Arquitetura Técnica
+## Arquitetura Técnica
 
 ### Stack Tecnológico
 
@@ -53,7 +53,7 @@ sistema_financeiro_flask/
 └── README.md                 # Este arquivo
 ```
 
-## 🗄️ Banco de Dados
+## Banco de Dados
 
 ### Tabelas
 
@@ -119,7 +119,7 @@ users (1) ──────→ (N) audit_logs
 categories (1) ──→ (N) transactions
 ```
 
-## 🛣️ Rotas da Aplicação
+## Rotas da Aplicação
 
 ### Autenticação
 
@@ -135,35 +135,35 @@ categories (1) ──→ (N) transactions
 
 | Método | Rota | Descrição | Autenticação |
 |--------|------|-----------|--------------|
-| GET | `/` | Dashboard com resumo financeiro | ✅ Obrigatória |
+| GET | `/` | Dashboard com resumo financeiro |  Obrigatória |
 
 ### Categorias
 
 | Método | Rota | Descrição | Autenticação |
 |--------|------|-----------|--------------|
-| GET | `/categories` | Listar todas as categorias | ✅ Obrigatória |
-| GET | `/categories/create` | Formulário de criação | ✅ Obrigatória |
-| POST | `/categories/create` | Criar nova categoria | ✅ Obrigatória |
-| GET | `/categories/<id>/edit` | Formulário de edição | ✅ Obrigatória |
-| POST | `/categories/<id>/edit` | Atualizar categoria | ✅ Obrigatória |
-| POST | `/categories/<id>/delete` | Deletar categoria | ✅ Obrigatória |
+| GET | `/categories` | Listar todas as categorias |  Obrigatória |
+| GET | `/categories/create` | Formulário de criação |  Obrigatória |
+| POST | `/categories/create` | Criar nova categoria |  Obrigatória |
+| GET | `/categories/<id>/edit` | Formulário de edição |  Obrigatória |
+| POST | `/categories/<id>/edit` | Atualizar categoria |  Obrigatória |
+| POST | `/categories/<id>/delete` | Deletar categoria |  Obrigatória |
 
 ### Lançamentos
 
 | Método | Rota | Descrição | Autenticação |
 |--------|------|-----------|--------------|
-| GET | `/transactions` | Listar lançamentos (com filtros) | ✅ Obrigatória |
-| GET | `/transactions/create` | Formulário de criação | ✅ Obrigatória |
-| POST | `/transactions/create` | Criar novo lançamento | ✅ Obrigatória |
-| GET | `/transactions/<id>/edit` | Formulário de edição | ✅ Obrigatória |
-| POST | `/transactions/<id>/edit` | Atualizar lançamento | ✅ Obrigatória |
-| POST | `/transactions/<id>/delete` | Deletar lançamento | ✅ Obrigatória |
+| GET | `/transactions` | Listar lançamentos (com filtros) |  Obrigatória |
+| GET | `/transactions/create` | Formulário de criação |  Obrigatória |
+| POST | `/transactions/create` | Criar novo lançamento |  Obrigatória |
+| GET | `/transactions/<id>/edit` | Formulário de edição |  Obrigatória |
+| POST | `/transactions/<id>/edit` | Atualizar lançamento |  Obrigatória |
+| POST | `/transactions/<id>/delete` | Deletar lançamento |  Obrigatória |
 
 **Parâmetros de Filtro (GET `/transactions`):**
 - `type`: Filtrar por tipo ('entrada' ou 'saída')
 - `category`: Filtrar por ID da categoria
 
-## 📋 Regras de Negócio
+## Regras de Negócio
 
 ### 1. Validação de Usuário
 - **Regra**: Cada usuário deve ter username e email únicos
@@ -211,7 +211,7 @@ categories (1) ──→ (N) transactions
 - **Implementação**: Log automático em `audit_logs` após cada operação
 - **Rastreabilidade**: Identificar quem fez o quê e quando
 
-## 🚀 Como Executar o Projeto
+## Como Executar o Projeto
 
 ### Pré-requisitos
 - Python 3.8+
@@ -264,7 +264,7 @@ Ao iniciar a aplicação pela primeira vez:
 5. Faça login com suas credenciais
 6. Comece a usar o sistema!
 
-## 📦 Dependências
+## Dependências
 
 ```
 Flask==3.1.3
@@ -279,7 +279,7 @@ Instale todas com:
 pip install -r requirements.txt
 ```
 
-## 🔐 Segurança
+## Segurança
 
 - **Senhas**: Armazenadas com hash (werkzeug.security)
 - **Sessões**: Gerenciadas pelo Flask com SECRET_KEY
@@ -287,7 +287,7 @@ pip install -r requirements.txt
 - **Isolamento**: Cada usuário acessa apenas seus dados
 - **Validação**: Todas as entradas são validadas no backend
 
-## 📝 Variáveis de Ambiente
+## Variáveis de Ambiente
 
 Crie um arquivo `.env` na raiz do projeto:
 
@@ -300,43 +300,43 @@ SECRET_KEY=sua-chave-secreta-aqui-mude-em-producao
 
 **Nota**: Para produção, altere `FLASK_ENV` para `production` e use uma `SECRET_KEY` forte.
 
-## 🎯 Funcionalidades Principais
+## Funcionalidades Principais
 
-✅ **Autenticação de Usuários**
+ **Autenticação de Usuários**
 - Registro de novos usuários
 - Login seguro com hash de senha
 - Logout e gerenciamento de sessão
 
-✅ **Gestão de Categorias**
+ **Gestão de Categorias**
 - Criar categorias personalizadas
 - Definir tipo (entrada ou saída)
 - Editar e deletar categorias
 - Isolamento por usuário
 
-✅ **Registro de Lançamentos**
+ **Registro de Lançamentos**
 - Criar entradas e saídas
 - Associar a uma categoria
 - Adicionar descrição opcional
 - Definir data do lançamento
 - Editar e deletar lançamentos
 
-✅ **Dashboard Financeiro**
+ **Dashboard Financeiro**
 - Resumo de entradas totais
 - Resumo de saídas totais
 - Cálculo automático de saldo
 - Últimos lançamentos registrados
 
-✅ **Filtros Avançados**
+ **Filtros Avançados**
 - Filtrar por tipo (entrada/saída)
 - Filtrar por categoria
 - Combinar múltiplos filtros
 
-✅ **Auditoria e Histórico**
+ **Auditoria e Histórico**
 - Log de todas as operações
 - Rastreamento de quem fez o quê
 - Histórico completo de mudanças
 
-## 🎨 Interface
+## Interface
 
 A aplicação possui uma interface elegante e intuitiva com:
 - Design responsivo
@@ -346,7 +346,7 @@ A aplicação possui uma interface elegante e intuitiva com:
 - Mensagens de feedback (sucesso/erro)
 - Tabelas organizadas com ações
 
-## 📊 Exemplo de Uso
+## Exemplo de Uso
 
 1. **Registrar usuário**: Acesse `/register` e crie uma conta
 2. **Criar categorias**: Vá para "Categorias" e crie "Salário" (entrada) e "Alimentação" (saída)
@@ -354,7 +354,7 @@ A aplicação possui uma interface elegante e intuitiva com:
 4. **Ver dashboard**: Volte ao dashboard e veja o saldo atualizado
 5. **Filtrar**: Use os filtros para visualizar apenas entradas ou apenas uma categoria
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Erro: "ModuleNotFoundError: No module named 'flask'"
 **Solução**: Ative o ambiente virtual e instale as dependências
@@ -369,16 +369,13 @@ pip install -r requirements.txt
 ### Erro: "Porta 5000 já está em uso"
 **Solução**: Altere a porta em `run.py` ou libere a porta 5000
 
-## 📚 Referências
+## Referências
 
 - [Flask Documentation](https://flask.palletsprojects.com/)
 - [SQLAlchemy Documentation](https://docs.sqlalchemy.org/)
 - [Werkzeug Security](https://werkzeug.palletsprojects.com/security/)
 
-## 📄 Licença
 
-Este projeto é fornecido como material educacional.
 
----
 
-**Desenvolvido com ❤️ para fins educacionais**
+
