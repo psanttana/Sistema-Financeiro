@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Categorias - Sistema Financeiro{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h1 style="color: white;">Categorias</h1>
+    <a href="{{ url_for('categories.create_category') }}" class="btn">+ Nova Categoria</a>
+</div>
+
+{% if categories %}
+<div class="card">
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Criada em</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.name }}</td>
+                <td>
+                    <span style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; background: {% if category.type == 'entrada' %}#d4edda{% else %}#f8d7da{% endif %}; color: {% if category.type == 'entrada' %}#155724{% else %}#721c24{% endif %};">
+                        {{ category.type }}
+                    </span>
+                </td>
+                <td>{{ category.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+                <td>
+                    <div class="actions">
+                        <a href="{{ url_for('categories.edit_category', id=category.id) }}" class="btn btn-secondary">Editar</a>
+                        <form method="POST" action="{{ url_for('categories.delete_category', id=category.id) }}" style="display: inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza?')">Deletar</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="card" style="text-align: center; padding: 3rem;">
+    <p style="font-size: 1.1rem; color: #666; margin-bottom: 1rem;">Nenhuma categoria cadastrada</p>
+    <a href="{{ url_for('categories.create_category') }}" class="btn">Criar Primeira Categoria</a>
+</div>
+{% endif %}
+{% endblock %}

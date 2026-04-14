@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Lançamentos - Sistema Financeiro{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h1 style="color: white;">Lançamentos</h1>
+    <a href="{{ url_for('transactions.create_transaction') }}" class="btn">+ Novo Lançamento</a>
+</div>
+
+<div class="card" style="margin-bottom: 2rem;">
+    <div class="card-title">🔍 Filtros</div>
+    <form method="GET" style="background: transparent; padding: 0; box-shadow: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: flex-end;">
+            <div class="form-group" style="margin-bottom: 0;">
+                <label for="type">Tipo</label>
+                <select id="type" name="type">
+                    <option value="">Todos</option>
+                    <option value="entrada" {% if type_filter == 'entrada' %}selected{% endif %}>Entradas</option>
+                    <option value="saída" {% if type_filter == 'saída' %}selected{% endif %}>Saídas</option>
+                </select>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 0;">
+                <label for="category">Categoria</label>
+                <select id="category" name="category">
+                    <option value="">Todas</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category_filter|int == category.id %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <button type="submit" class="btn" style="width: 100%;">Filtrar</button>
+            <a href="{{ url_for('transactions.list_transactions') }}" class="btn btn-secondary" style="width: 100%;">Limpar</a>
+        </div>
+    </form>
+</div>
+
+{% if transactions %}
+<div class="card">
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Categoria</th>
+                <th>Descrição</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.date.strftime('%d/%m/%Y') }}</td>
+                <td>{{ transaction.category.name }}</td>
+                <td>{{ transaction.description or '-' }}</td>
+                <td>
+                    <span style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; background: {% if transaction.type == 'entrada' %}#d4edda{% else %}#f8d7da{% endif %}; color: {% if transaction.type == 'entrada' %}#155724{% else %}#721c24{% endif %};">
+                        {{ transaction.type }}
+                    </span>
+                </td>
+                <td style="font-weight: bold; color: {% if transaction.type == 'entrada' %}#28a745{% else %}#dc3545{% endif %};">
+                    {{ '+' if transaction.type == 'entrada' else '-' }} R$ {{ "%.2f"|format(transaction.value) }}
+                </td>
+                <td>
+                    <div class="actions">
+                        <a href="{{ url_for('transactions.edit_transaction', id=transaction.id) }}" class="btn btn-secondary">Editar</a>
+                        <form method="POST" action="{{ url_for('transactions.delete_transaction', id=transaction.id) }}" style="display: inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza?')">Deletar</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="card" style="text-align: center; padding: 3rem;">
+    <p style="font-size: 1.1rem; color: #666; margin-bottom: 1rem;">Nenhum lançamento encontrado</p>
+    <a href="{{ url_for('transactions.create_transaction') }}" class="btn">Registrar Primeiro Lançamento</a>
+</div>
+{% endif %}
+{% endblock %}

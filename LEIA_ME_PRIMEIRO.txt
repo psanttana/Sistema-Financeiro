@@ -1,0 +1,122 @@
+================================================================================
+SISTEMA FINANCEIRO SIMPLIFICADO - INSTRUÇÕES PARA GITHUB
+================================================================================
+
+🔐 SEGURANÇA IMPORTANTE:
+   Nunca compartilhe seu token de acesso do GitHub em chats, emails ou 
+   mensagens. Use o script setup_github.sh que mantém seu token seguro.
+
+================================================================================
+PASSO 1: CRIAR REPOSITÓRIO NO GITHUB
+================================================================================
+
+1. Acesse: https://github.com/new
+2. Preencha:
+   - Repository name: Sistema-Financeiro
+   - Description: Sistema de controle financeiro pessoal
+   - Deixe as outras opções padrão
+3. Clique em "Create repository"
+4. NÃO clique em "Create README" ou "Add .gitignore"
+
+================================================================================
+PASSO 2: GERAR TOKEN DE ACESSO
+================================================================================
+
+1. Acesse: https://github.com/settings/tokens
+2. Clique em "Generate new token"
+3. Configure:
+   - Note: "Sistema Financeiro Setup"
+   - Expiration: 1 hour (por segurança)
+   - Selecione APENAS: ☑ repo
+4. Clique em "Generate token"
+5. COPIE o token (você não verá novamente)
+
+================================================================================
+PASSO 3: EXECUTAR O SCRIPT
+================================================================================
+
+Linux/macOS:
+  1. Abra o terminal neste diretório
+  2. Execute: chmod +x setup_github.sh
+  3. Execute: ./setup_github.sh
+
+Windows (PowerShell):
+  1. Abra PowerShell como administrador
+  2. Execute: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+  3. Execute: .\setup_github.sh
+
+Windows (Git Bash):
+  1. Abra Git Bash neste diretório
+  2. Execute: chmod +x setup_github.sh
+  3. Execute: ./setup_github.sh
+
+================================================================================
+PASSO 4: RESPONDER AS PERGUNTAS
+================================================================================
+
+O script fará perguntas:
+
+1. "Deseja configurar seu nome e email no Git?"
+   → Responda: s
+   → Digite seu nome completo
+   → Digite seu email
+
+2. "Digite seu username do GitHub"
+   → Responda: psanttana (ou seu username)
+
+3. "Digite o nome do repositório"
+   → Responda: Sistema-Financeiro
+
+4. Quando pedir autenticação:
+   - Username: psanttana (seu username)
+   - Password: Cole seu token aqui (não aparecerá na tela)
+
+================================================================================
+PASSO 5: VERIFICAR SUCESSO
+================================================================================
+
+Após o script terminar com sucesso:
+
+1. Acesse: https://github.com/psanttana/Sistema-Financeiro
+2. Verifique se todos os arquivos estão lá
+3. Pronto! Seu projeto está no GitHub
+
+================================================================================
+PRÓXIMOS PASSOS
+================================================================================
+
+1. Revogue o token usado (por segurança):
+   - Acesse: https://github.com/settings/tokens
+   - Clique em "Delete" ao lado do token usado
+
+2. Compartilhe o link com seu professor:
+   - https://github.com/psanttana/Sistema-Financeiro
+
+3. Grave o vídeo de demonstração seguindo:
+   - GUIA_VIDEO_DEMONSTRACAO.md
+
+================================================================================
+DÚVIDAS?
+================================================================================
+
+Leia o arquivo: GUIA_GITHUB.md
+
+Ele contém:
+- Instruções detalhadas
+- Solução de problemas
+- Boas práticas de segurança
+
+================================================================================
+IMPORTANTE: REVOGUE O TOKEN APÓS USAR!
+================================================================================
+
+Por segurança, após enviar o projeto para GitHub:
+
+1. Acesse: https://github.com/settings/tokens
+2. Encontre o token usado
+3. Clique em "Delete"
+4. Confirme a deleção
+
+Assim, mesmo que alguém veja o token nesta conversa, ele não será mais válido.
+
+================================================================================

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Novo Lançamento - Sistema Financeiro{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center; color: white; margin-bottom: 2rem;">Novo Lançamento</h1>
+
+<form method="POST">
+    <div class="form-group">
+        <label for="type">Tipo</label>
+        <select id="type" name="type" required>
+            <option value="">Selecione um tipo</option>
+            <option value="entrada">Entrada (Renda)</option>
+            <option value="saída">Saída (Despesa)</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="category_id">Categoria</label>
+        <select id="category_id" name="category_id" required>
+            <option value="">Selecione uma categoria</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="value">Valor (R$)</label>
+        <input type="number" id="value" name="value" step="0.01" required placeholder="0.00">
+    </div>
+    
+    <div class="form-group">
+        <label for="description">Descrição</label>
+        <textarea id="description" name="description" placeholder="Descrição opcional" rows="3"></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="date">Data</label>
+        <input type="date" id="date" name="date" required value="{{ now.strftime('%Y-%m-%d') if now else '' }}">
+    </div>
+    
+    <div style="display: flex; gap: 1rem;">
+        <button type="submit" class="btn" style="flex: 1;">Registrar Lançamento</button>
+        <a href="{{ url_for('transactions.list_transactions') }}" class="btn btn-secondary" style="flex: 1; text-align: center;">Cancelar</a>
+    </div>
+</form>
+
+<script>
+    // Definir data padrão como hoje
+    document.getElementById('date').valueAsDate = new Date();
+</script>
+{% endblock %}

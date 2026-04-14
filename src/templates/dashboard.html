@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Sistema Financeiro{% endblock %}
+
+{% block content %}
+<h1 style="color: white; margin-bottom: 2rem;">Dashboard</h1>
+
+<div class="grid">
+    <div class="card">
+        <div class="card-title">📈 Total de Entradas</div>
+        <div class="card-value" style="color: #28a745;">R$ {{ "%.2f"|format(total_entrada) }}</div>
+        <div class="card-subtitle">Renda total recebida</div>
+    </div>
+    
+    <div class="card">
+        <div class="card-title">📉 Total de Saídas</div>
+        <div class="card-value" style="color: #dc3545;">R$ {{ "%.2f"|format(total_saida) }}</div>
+        <div class="card-subtitle">Despesas totais</div>
+    </div>
+    
+    <div class="card">
+        <div class="card-title">💰 Saldo</div>
+        <div class="card-value" style="color: {% if saldo >= 0 %}#667eea{% else %}#dc3545{% endif %};">R$ {{ "%.2f"|format(saldo) }}</div>
+        <div class="card-subtitle">Resultado líquido</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title">⚡ Ações Rápidas</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <a href="{{ url_for('categories.create_category') }}" class="btn">+ Criar Categoria</a>
+        <a href="{{ url_for('transactions.create_transaction') }}" class="btn">+ Registrar Lançamento</a>
+        <a href="{{ url_for('categories.list_categories') }}" class="btn btn-secondary">Gerenciar Categorias</a>
+        <a href="{{ url_for('transactions.list_transactions') }}" class="btn btn-secondary">Ver Lançamentos</a>
+    </div>
+</div>
+
+{% if transactions %}
+<div class="card">
+    <div class="card-title">📋 Últimos Lançamentos</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Categoria</th>
+                <th>Descrição</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.date.strftime('%d/%m/%Y') }}</td>
+                <td>{{ transaction.category.name }}</td>
+                <td>{{ transaction.description or '-' }}</td>
+                <td>
+                    <span style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; background: {% if transaction.type == 'entrada' %}#d4edda{% else %}#f8d7da{% endif %}; color: {% if transaction.type == 'entrada' %}#155724{% else %}#721c24{% endif %};">
+                        {{ transaction.type }}
+                    </span>
+                </td>
+                <td style="font-weight: bold; color: {% if transaction.type == 'entrada' %}#28a745{% else %}#dc3545{% endif %};">
+                    {{ '+' if transaction.type == 'entrada' else '-' }} R$ {{ "%.2f"|format(transaction.value) }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock %}
