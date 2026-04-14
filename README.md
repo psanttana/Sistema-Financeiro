@@ -4,7 +4,7 @@ Um sistema web elegante e completo para controle de finanças pessoais, desenvol
 
 ## Descrição do Sistema
 
-O Sistema Financeiro Simplificado é uma aplicação que permite aos usuários gerenciar suas finanças pessoais de forma simples e eficiente. Através de uma interface intuitiva, os usuários podem:
+O Sistema Financeiro é uma aplicação que permite aos usuários gerenciar suas finanças pessoais de forma simples e eficiente. Através de uma interface intuitiva, os usuários podem:
 
 - **Registrar entradas e saídas** de dinheiro
 - **Organizar lançamentos por categorias** personalizadas
